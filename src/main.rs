@@ -6,12 +6,18 @@ fn main() {
     let word = get_word();
     // take input
     let mut attempt = get_attempt();
-    while compare_result(attempt, word.clone()) {
+    let mut attempt_count = 1;
+    while compare_result(attempt, word.clone()) && attempt_count < 5 {
         attempt = get_attempt();
+        attempt_count += 1;
+        println!("Attempt: {}/5", attempt_count);
     }
 }
 
 fn compare_result(input : String, word : String) -> bool {
+    if input.is_empty() {
+        return false;
+    }
     let mut n : usize = 0;
     for _ in input.chars() {
         if input.chars().nth(n).unwrap() == word.chars().nth(n).unwrap() { 
